@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import routers from "./app/routes";
 
 const app = express();
 app.use(express.json());
@@ -13,7 +14,7 @@ app.use(
   })
 );
 
-app.use("/api", express.Router());
+app.use("/api", routers);
 
 // Home Route.
 const homeRoute = (req: Request, res: Response) => {
