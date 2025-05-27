@@ -12,4 +12,7 @@ router.post(
   CustomerControllers.createCustomer
 );
 
+// get all customers
+router.get("/", CustomerControllers.fetchAllCustomers);
+
 export const CustomerRoutes = router;

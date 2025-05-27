@@ -17,6 +17,13 @@ const createCustomer = async (payload: Customer) => {
   return result;
 };
 
+// fetch all customer from db.
+const fetchAllCustomersFromDB = async () => {
+  const customers = await prisma.customer.findMany();
+  return customers;
+};
+
 export const CustomerServices = {
   createCustomer,
+  fetchAllCustomersFromDB,
 };

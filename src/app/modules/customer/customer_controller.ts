@@ -13,6 +13,18 @@ const createCustomer = catchAsync(async (req, res) => {
   });
 });
 
+// get all customers controller
+const fetchAllCustomers = catchAsync(async (req, res) => {
+  const result = await CustomerServices.fetchAllCustomersFromDB();
+  sendResponse(res, {
+    status: 200,
+    success: true,
+    message: "Customers fetched successfully",
+    data: result,
+  });
+});
+
 export const CustomerControllers = {
   createCustomer,
+  fetchAllCustomers,
 };
