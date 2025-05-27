@@ -34,10 +34,14 @@ const createCustomerValidationSchema = z.object({
         .string({
           required_error: "Phone number is required",
         })
-        .length(11, {
-          message: "Phone number must be exactly 11 characters long",
+        .min(9, {
+          message: "Phone number must be at least 9 characters long",
         })
-        .regex(/^[0-9]+$/, {
+        .max(14, { message: "Phone number must not exceed 14 characters" })
+        // .length(11, {
+        //   message: "Phone number must be exactly 11 characters long",
+        // })
+        .regex(/^[0-9--]+$/, {
           message: "Phone number must contain only numbers",
         }),
     },

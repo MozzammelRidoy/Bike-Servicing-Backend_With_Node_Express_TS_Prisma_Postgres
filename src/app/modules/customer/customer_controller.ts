@@ -6,7 +6,7 @@ import { CustomerServices } from "./customer_service";
 const createCustomer = catchAsync(async (req, res) => {
   const result = await CustomerServices.createCustomer(req.body);
   sendResponse(res, {
-    status: 200,
+    status: 201,
     success: true,
     message: "Customer created successfully",
     data: result,
