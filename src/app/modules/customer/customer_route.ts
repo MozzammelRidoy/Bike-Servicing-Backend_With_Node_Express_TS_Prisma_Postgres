@@ -16,5 +16,9 @@ router.post(
 router.get("/", CustomerControllers.fetchAllCustomers);
 
 // get single customer by id
-router.get("/:id", CustomerControllers.getSingleCustomerById);
+router.get(
+  "/:id",
+  validateRequest(CustomerValidation.getSingleCustomerID_ValidationSchema),
+  CustomerControllers.getSingleCustomerById
+);
 export const CustomerRoutes = router;

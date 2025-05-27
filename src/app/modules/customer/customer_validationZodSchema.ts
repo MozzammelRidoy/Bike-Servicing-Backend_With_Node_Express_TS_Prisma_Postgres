@@ -49,6 +49,23 @@ const createCustomerValidationSchema = z.object({
   ),
 });
 
+// validation params
+const getSingleCustomerID_ValidationSchema = z.object({
+  params: z.object({
+    id: z
+      .string({
+        required_error: "Customer ID is required",
+      })
+      .min(10, {
+        message: "Customer ID must be at least 10 characters long",
+      })
+      .max(50, {
+        message: "Customer ID must not exceed 50 characters",
+      }),
+  }),
+});
+
 export const CustomerValidation = {
   createCustomerValidationSchema,
+  getSingleCustomerID_ValidationSchema,
 };
