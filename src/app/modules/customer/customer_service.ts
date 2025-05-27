@@ -23,7 +23,15 @@ const fetchAllCustomersFromDB = async () => {
   return customers;
 };
 
+// fetch single customer by id
+const fetchSingleCustomerByIdIntoDB = async (customerId: string) => {
+  const customer = await prisma.customer.findUnique({
+    where: { customerId },
+  });
+  return customer || null;
+};
 export const CustomerServices = {
   createCustomer,
   fetchAllCustomersFromDB,
+  fetchSingleCustomerByIdIntoDB,
 };

@@ -15,4 +15,6 @@ router.post(
 // get all customers
 router.get("/", CustomerControllers.fetchAllCustomers);
 
+// get single customer by id
+router.get("/:id", CustomerControllers.getSingleCustomerById);
 export const CustomerRoutes = router;
