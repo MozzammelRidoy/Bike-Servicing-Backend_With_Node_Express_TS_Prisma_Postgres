@@ -21,7 +21,17 @@ const fetchAllBikesFromDB = async () => {
   const bikes = await prisma.bike.findMany();
   return bikes;
 };
+
+// fetch single bike by id
+const fetchSingleBikeByIdIntoDB = async (bikeId: string) => {
+  const bike = await prisma.bike.findUnique({
+    where: { bikeId },
+  });
+  return bike || null;
+};
+
 export const BikesServices = {
   createBikeIntoDB,
   fetchAllBikesFromDB,
+  fetchSingleBikeByIdIntoDB,
 };

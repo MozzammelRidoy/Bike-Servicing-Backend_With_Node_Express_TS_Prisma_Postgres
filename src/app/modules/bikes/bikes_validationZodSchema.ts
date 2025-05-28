@@ -32,6 +32,22 @@ const createBikeValidationZodSchema = z.object({
   ),
 });
 
+const getSingleBikeID_ValidationSchema = z.object({
+  params: z.object({
+    bikeId: z
+      .string({
+        required_error: "Bike ID is required",
+      })
+      .min(10, {
+        message: "Bike ID must be at least 10 characters long",
+      })
+      .max(50, {
+        message: "Bike ID must not exceed 50 characters",
+      }),
+  }),
+});
+
 export const BikeValidation = {
   createBikeValidationZodSchema,
+  getSingleBikeID_ValidationSchema,
 };

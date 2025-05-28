@@ -15,5 +15,12 @@ router.post(
 // fetch all bikes.
 router.get("/", BikeControllers.fetchAllBikes);
 
+// fetch single bike by id.
+router.get(
+  "/:bikeId",
+  validateRequest(BikeValidation.getSingleBikeID_ValidationSchema),
+  BikeControllers.fetchSingleBike
+);
+
 export const BikeRoutes = router;
 //
