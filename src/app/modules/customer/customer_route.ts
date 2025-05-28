@@ -28,4 +28,10 @@ router.put(
   validateRequest(CustomerValidation.getSingleCustomerID_ValidationSchema),
   CustomerControllers.updateCustomerById
 );
+// delete customer by id
+router.delete(
+  "/:id",
+  validateRequest(CustomerValidation.getSingleCustomerID_ValidationSchema),
+  CustomerControllers.deleteCustomerById
+);
 export const CustomerRoutes = router;

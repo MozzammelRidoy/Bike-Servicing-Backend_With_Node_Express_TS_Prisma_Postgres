@@ -57,9 +57,24 @@ const updateCustomerInfoIntoDB = async (
   });
   return result;
 };
+
+// customer deelte into db.
+const deleteCustomerIntoDB = async (customerId: string) => {
+  const extCustomer = await prisma.customer.findUnique({
+    where: { customerId },
+  });
+  if (!extCustomer) {
+    throw new AppError(404, "id", "Customer Not found");
+  }
+  await prisma.customer.delete({
+    where: { customerId },
+  });
+  return { message: "Customer deleted successfully" };
+};
 export const CustomerServices = {
   createCustomer,
   fetchAllCustomersFromDB,
   fetchSingleCustomerByIdIntoDB,
   updateCustomerInfoIntoDB,
+  deleteCustomerIntoDB,
 };
