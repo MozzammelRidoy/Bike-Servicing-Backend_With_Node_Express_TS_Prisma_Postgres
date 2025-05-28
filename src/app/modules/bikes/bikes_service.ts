@@ -16,6 +16,12 @@ const createBikeIntoDB = async (payload: Bike) => {
   return bike;
 };
 
+// fetch all bikes from db.
+const fetchAllBikesFromDB = async () => {
+  const bikes = await prisma.bike.findMany();
+  return bikes;
+};
 export const BikesServices = {
   createBikeIntoDB,
+  fetchAllBikesFromDB,
 };

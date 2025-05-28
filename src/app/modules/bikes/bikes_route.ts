@@ -12,5 +12,8 @@ router.post(
   BikeControllers.createBike
 );
 
+// fetch all bikes.
+router.get("/", BikeControllers.fetchAllBikes);
+
 export const BikeRoutes = router;
 //
