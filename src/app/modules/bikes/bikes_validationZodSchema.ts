@@ -19,8 +19,8 @@ const createBikeValidationZodSchema = z.object({
         .number({
           required_error: "Year is required",
         })
-        .min(1900, { message: "Year must be at least 1900" })
-        .max(2025, { message: "Year must not exceed 2100" }),
+        .min(1900, { message: "Year must be up to 1900" })
+        .max(2025, { message: "Year must be under 2025" }),
       customerId: z
         .string({
           required_error: "Customer ID is required",
