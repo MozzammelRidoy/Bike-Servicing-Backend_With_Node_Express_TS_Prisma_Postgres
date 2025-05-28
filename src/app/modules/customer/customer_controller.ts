@@ -37,8 +37,23 @@ const getSingleCustomerById = catchAsync(async (req, res) => {
   });
 });
 
+// update customer by id controller
+const updateCustomerById = catchAsync(async (req, res) => {
+  const result = await CustomerServices.updateCustomerInfoIntoDB(
+    req.params.id,
+    req.body
+  );
+  sendResponse(res, {
+    status: 200,
+    success: true,
+    message: "Customer updated successfully",
+    data: result,
+  });
+});
+
 export const CustomerControllers = {
   createCustomer,
   fetchAllCustomers,
   getSingleCustomerById,
+  updateCustomerById,
 };

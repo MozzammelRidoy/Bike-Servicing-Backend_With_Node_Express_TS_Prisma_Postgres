@@ -21,4 +21,11 @@ router.get(
   validateRequest(CustomerValidation.getSingleCustomerID_ValidationSchema),
   CustomerControllers.getSingleCustomerById
 );
+
+// update customer by id
+router.put(
+  "/:id",
+  validateRequest(CustomerValidation.getSingleCustomerID_ValidationSchema),
+  CustomerControllers.updateCustomerById
+);
 export const CustomerRoutes = router;

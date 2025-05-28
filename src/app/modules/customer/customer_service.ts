@@ -30,8 +30,36 @@ const fetchSingleCustomerByIdIntoDB = async (customerId: string) => {
   });
   return customer || null;
 };
+
+// update customer information.
+const updateCustomerInfoIntoDB = async (
+  customerId: string,
+  payload: Partial<Customer>
+) => {
+  if (payload.email) {
+    throw new AppError(400, "email", "You can not change email");
+  }
+  if (payload.customerId) {
+    throw new AppError(400, "customerId", "You can not change customerId");
+  }
+  if (payload.createdAt || payload.updatedAt) {
+    throw new AppError(400, "", "You can not change createdAt or updatedAt");
+  }
+  const customer = await prisma.customer.findUnique({
+    where: { customerId },
+  });
+  if (!customer) {
+    throw new AppError(404, "id", "Customer Not found");
+  }
+  const result = await prisma.customer.update({
+    where: { customerId },
+    data: payload,
+  });
+  return result;
+};
 export const CustomerServices = {
   createCustomer,
   fetchAllCustomersFromDB,
   fetchSingleCustomerByIdIntoDB,
+  updateCustomerInfoIntoDB,
 };
