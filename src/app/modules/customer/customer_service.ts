@@ -40,7 +40,7 @@ const fetchSingleCustomerByIdIntoDB = async (customerId: string) => {
 // update customer information.
 const updateCustomerInfoIntoDB = async (
   customerId: string,
-  payload: Partial<Customer>
+  payload: Partial<Customer>,
 ) => {
   if (payload.email) {
     throw new AppError(400, "email", "You can not change email");
