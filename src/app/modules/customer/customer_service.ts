@@ -66,10 +66,37 @@ const deleteCustomerIntoDB = async (customerId: string) => {
   if (!extCustomer) {
     throw new AppError(404, "id", "Customer Not found");
   }
-  await prisma.customer.delete({
-    where: { customerId },
-  });
-  return { message: "Customer deleted successfully" };
+
+  try {
+    await prisma.$transaction(async (transactionClient) => {
+      const bikes = await transactionClient.bike.findMany({
+        where: { customerId },
+        select: { bikeId: true },
+      });
+
+      const bikeIds = bikes.map((b) => b.bikeId);
+
+      await transactionClient.serviceRecord.deleteMany({
+        where: {
+          bikeId: {
+            in: bikeIds,
+          },
+        },
+      });
+
+      await transactionClient.bike.deleteMany({
+        where: { customerId },
+      });
+
+      await transactionClient.customer.delete({
+        where: { customerId },
+      });
+    });
+
+    return { message: "Customer All Records deleted successfully" };
+  } catch (err) {
+    throw new AppError(400, "", "Error deleting customer records");
+  }
 };
 export const CustomerServices = {
   createCustomer,
