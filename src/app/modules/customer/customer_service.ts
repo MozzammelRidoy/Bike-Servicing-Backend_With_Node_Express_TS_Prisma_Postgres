@@ -10,8 +10,14 @@ const createCustomer = async (payload: Customer) => {
   if (exist) {
     throw new AppError(400, "email", "Customer already exists with this email");
   }
+  const data = {
+    name: payload.name,
+    email: payload.email,
+    phone: payload.phone,
+  };
+
   const result = await prisma.customer.create({
-    data: payload,
+    data,
   });
 
   return result;
