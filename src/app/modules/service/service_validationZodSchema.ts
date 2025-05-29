@@ -28,6 +28,22 @@ const createServiceValidationZodSchema = z.object({
   }),
 });
 
+const getSingleServiceID_ValidationSchema = z.object({
+  params: z.object({
+    id: z
+      .string({
+        required_error: "Service ID is required",
+      })
+      .min(10, {
+        message: "Service ID must be at least 10 characters long",
+      })
+      .max(50, {
+        message: "Service ID must not exceed 50 characters",
+      }),
+  }),
+});
+
 export const ServiceValidation = {
   createServiceValidationZodSchema,
+  getSingleServiceID_ValidationSchema,
 };

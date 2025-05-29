@@ -46,7 +46,19 @@ const fetchAllServicesFromDB = async () => {
 
   return services;
 };
+
+// fetch single sercice by id
+const fetchSingleServiceById = async (serviceId: string) => {
+  const service = await prisma.serviceRecord.findUnique({
+    where: {
+      serviceId,
+    },
+  });
+
+  return service || null;
+};
 export const ServiceServices = {
   createServiceIntoDB,
   fetchAllServicesFromDB,
+  fetchSingleServiceById,
 };

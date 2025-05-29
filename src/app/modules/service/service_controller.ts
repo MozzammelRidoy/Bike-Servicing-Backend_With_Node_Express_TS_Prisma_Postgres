@@ -23,7 +23,20 @@ const getAllServices = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
+// fetch single sercice by id
+const getSingleServiceById = catchAsync(async (req, res) => {
+  const result = await ServiceServices.fetchSingleServiceById(req.params.id);
+  sendResponse(res, {
+    status: 200,
+    success: true,
+    message: "Service fetched successfully",
+    data: result,
+  });
+});
+
 export const ServiceControllers = {
   createService,
   getAllServices,
+  getSingleServiceById,
 };

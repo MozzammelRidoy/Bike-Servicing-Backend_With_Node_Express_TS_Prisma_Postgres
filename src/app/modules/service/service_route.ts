@@ -15,4 +15,11 @@ router.post(
 // fetch all services
 router.get("/", ServiceControllers.getAllServices);
 
+// fetch single service by id
+router.get(
+  "/:id",
+  validateRequest(ServiceValidation.getSingleServiceID_ValidationSchema),
+  ServiceControllers.getSingleServiceById
+);
+
 export const ServiceRoutes = router;
