@@ -17,13 +17,13 @@ const createServiceIntoDB = async (paylaod: ServiceRecord) => {
 
   paylaod.status = ServiceStatus.PENDING;
   paylaod.serviceDate = new Date(paylaod.serviceDate);
-  if (paylaod.serviceDate < new Date()) {
-    throw new AppError(
-      400,
-      "serviceDate",
-      "Service date must be in the future"
-    );
-  }
+  // if (paylaod.serviceDate < new Date()) {
+  //   throw new AppError(
+  //     400,
+  //     "serviceDate",
+  //     "Service date must be in the future"
+  //   );
+  // }
   paylaod.completionDate = null;
 
   const data = {
@@ -93,9 +93,27 @@ const updateService_byID_intoDB = async (
   return result;
 };
 
+// fetch status of older then 7 days over due services.
+const fetchOverDueServices = async () => {
+  const services = await prisma.serviceRecord.findMany({
+    where: {
+      serviceDate: {
+        lte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+      },
+      OR: [
+        { status: ServiceStatus.PENDING },
+        { status: ServiceStatus.IN_PROGRESS },
+      ],
+    },
+  });
+
+  return services;
+};
+
 export const ServiceServices = {
   createServiceIntoDB,
   fetchAllServicesFromDB,
   fetchSingleServiceById,
   updateService_byID_intoDB,
+  fetchOverDueServices,
 };

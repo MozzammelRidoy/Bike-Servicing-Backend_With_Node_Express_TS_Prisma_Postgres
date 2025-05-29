@@ -15,6 +15,9 @@ router.post(
 // fetch all services
 router.get("/", ServiceControllers.getAllServices);
 
+// fetch overdue services
+router.get("/status", ServiceControllers.getOverDueServices);
+
 // fetch single service by id
 router.get(
   "/:id",

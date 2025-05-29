@@ -49,9 +49,20 @@ const updateServiceByID = catchAsync(async (req, res) => {
   });
 });
 
+// fetch overdue services
+const getOverDueServices = catchAsync(async (req, res) => {
+  const result = await ServiceServices.fetchOverDueServices();
+  sendResponse(res, {
+    status: 200,
+    success: true,
+    message: "Overdue services fetched successfully",
+    data: result,
+  });
+});
 export const ServiceControllers = {
   createService,
   getAllServices,
   getSingleServiceById,
   updateServiceByID,
+  getOverDueServices,
 };
