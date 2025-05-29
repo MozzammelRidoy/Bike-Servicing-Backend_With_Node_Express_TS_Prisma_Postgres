@@ -55,7 +55,7 @@ const getOverDueServices = catchAsync(async (req, res) => {
   sendResponse(res, {
     status: 200,
     success: true,
-    message: "Overdue services fetched successfully",
+    message: "Overdue or pending services fetched successfully",
     data: result,
   });
 });
