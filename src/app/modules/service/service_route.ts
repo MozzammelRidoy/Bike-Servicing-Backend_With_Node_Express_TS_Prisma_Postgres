@@ -22,4 +22,11 @@ router.get(
   ServiceControllers.getSingleServiceById
 );
 
+// update service by id
+router.put(
+  "/:id/complete",
+  validateRequest(ServiceValidation.updateSevice_ValidationSchema),
+  ServiceControllers.updateServiceByID
+);
+
 export const ServiceRoutes = router;

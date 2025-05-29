@@ -43,7 +43,32 @@ const getSingleServiceID_ValidationSchema = z.object({
   }),
 });
 
+const updateSevice_ValidationSchema = z.object({
+  params: z.object({
+    id: z
+      .string({
+        required_error: "Service ID is required",
+      })
+      .min(10, {
+        message: "Service ID must be at least 10 characters long",
+      })
+      .max(50, {
+        message: "Service ID must not exceed 50 characters",
+      }),
+  }),
+  body: z.object({
+    completionDate: z
+      .string({
+        required_error: "Completion date is required",
+      })
+      .refine((date) => !isNaN(Date.parse(date)), {
+        message: "Completion Date Invalid date format",
+      }),
+  }),
+});
+
 export const ServiceValidation = {
   createServiceValidationZodSchema,
   getSingleServiceID_ValidationSchema,
+  updateSevice_ValidationSchema,
 };

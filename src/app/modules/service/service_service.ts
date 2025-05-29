@@ -57,8 +57,45 @@ const fetchSingleServiceById = async (serviceId: string) => {
 
   return service || null;
 };
+
+// update service by id.
+const updateService_byID_intoDB = async (
+  serviceId: string,
+  payload: Partial<ServiceRecord>
+) => {
+  const service = await prisma.serviceRecord.findUnique({
+    where: { serviceId },
+  });
+  if (!service) {
+    throw new AppError(404, "serviceId", "Service not found");
+  }
+  if (service.status === "DONE") {
+    throw new AppError(400, "serviceId", "Service already completed");
+  }
+  payload.completionDate = new Date(payload.completionDate || Date.now());
+
+  if (payload.completionDate < service.serviceDate) {
+    throw new AppError(
+      400,
+      "completionDate",
+      "Completion date must be after service date"
+    );
+  }
+  const updateData = {
+    status: ServiceStatus.DONE,
+    completionDate: payload.completionDate,
+  };
+  const result = await prisma.serviceRecord.update({
+    where: { serviceId },
+    data: updateData,
+  });
+
+  return result;
+};
+
 export const ServiceServices = {
   createServiceIntoDB,
   fetchAllServicesFromDB,
   fetchSingleServiceById,
+  updateService_byID_intoDB,
 };
