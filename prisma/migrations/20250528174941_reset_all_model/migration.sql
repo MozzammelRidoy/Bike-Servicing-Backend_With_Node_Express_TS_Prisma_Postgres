@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "ServiceStatus" AS ENUM ('PENDING', 'IN_PROGRESS', 'DONE');
+CREATE TYPE "ServiceStatus" AS ENUM ('pending', 'in-progress', 'done');
 
 -- CreateTable
 CREATE TABLE "customers" (
@@ -37,7 +37,16 @@ CREATE TABLE "service_records" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "customers_customerId_key" ON "customers"("customerId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "customers_email_key" ON "customers"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "bikes_bikeId_key" ON "bikes"("bikeId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "service_records_serviceId_key" ON "service_records"("serviceId");
 
 -- AddForeignKey
 ALTER TABLE "bikes" ADD CONSTRAINT "bikes_customerId_fkey" FOREIGN KEY ("customerId") REFERENCES "customers"("customerId") ON DELETE RESTRICT ON UPDATE CASCADE;
