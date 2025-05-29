@@ -12,4 +12,7 @@ router.post(
   ServiceControllers.createService
 );
 
+// fetch all services
+router.get("/", ServiceControllers.getAllServices);
+
 export const ServiceRoutes = router;

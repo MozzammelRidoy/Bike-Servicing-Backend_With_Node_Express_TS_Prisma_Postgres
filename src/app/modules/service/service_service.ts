@@ -40,6 +40,13 @@ const createServiceIntoDB = async (paylaod: ServiceRecord) => {
   return result;
 };
 
+// fetch all services
+const fetchAllServicesFromDB = async () => {
+  const services = await prisma.serviceRecord.findMany();
+
+  return services;
+};
 export const ServiceServices = {
   createServiceIntoDB,
+  fetchAllServicesFromDB,
 };

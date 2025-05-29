@@ -13,6 +13,17 @@ const createService = catchAsync(async (req, res) => {
   });
 });
 
+// fetch all services
+const getAllServices = catchAsync(async (req, res) => {
+  const result = await ServiceServices.fetchAllServicesFromDB();
+  sendResponse(res, {
+    status: 200,
+    success: true,
+    message: "Services fetched successfully",
+    data: result,
+  });
+});
 export const ServiceControllers = {
   createService,
+  getAllServices,
 };
