@@ -42,7 +42,25 @@ const createServiceIntoDB = async (paylaod: ServiceRecord) => {
 
 // fetch all services
 const fetchAllServicesFromDB = async () => {
-  const services = await prisma.serviceRecord.findMany();
+  const services = await prisma.serviceRecord.findMany({
+    include: {
+      bike: {
+        select: {
+          brand: true,
+          model: true,
+          year: true,
+          customer: {
+            select: {
+              customerId: true,
+              name: true,
+              phone: true,
+              email: true,
+            },
+          },
+        },
+      },
+    },
+  });
 
   return services;
 };
@@ -52,6 +70,23 @@ const fetchSingleServiceById = async (serviceId: string) => {
   const service = await prisma.serviceRecord.findUnique({
     where: {
       serviceId,
+    },
+    include: {
+      bike: {
+        select: {
+          brand: true,
+          model: true,
+          year: true,
+          customer: {
+            select: {
+              customerId: true,
+              name: true,
+              phone: true,
+              email: true,
+            },
+          },
+        },
+      },
     },
   });
 
