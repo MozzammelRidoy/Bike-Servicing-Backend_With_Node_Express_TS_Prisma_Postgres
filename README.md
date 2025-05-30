@@ -75,68 +75,18 @@ A backend API for managing customers, bikes, and service records at a bike servi
       ```
     * **Response (201 Created)**
 
-      ```json
-      {
-        "success": true,
-        "message": "Customer created successfully",
-        "data": {
-          "customerId": "87b3d7e1-8d9a-4f51-bf01-6f1e92f0f194",
-          "name": "John Doe",
-          "email": "john.doe@example.com",
-          "phone": "123-456-7890",
-          "createdAt": "2025-04-11T12:34:56.789Z"
-        }
-      }
-      ```
-
   * **Get All Customers** (`GET /api/customers`)
 
     * **Response (200 OK)**
 
-      ```json
-      {
-        "success": true,
-        "message": "Customers fetched successfully",
-        "data": [
-          {
-            "customerId": "87b3d7e1-8d9a-4f51-bf01-6f1e92f0f194",
-            "name": "John Doe",
-            "email": "john.doe@example.com",
-            "phone": "123-456-7890",
-            "createdAt": "2025-04-11T12:34:56.789Z"
-          }
-        ]
-      }
-      ```
 
   * **Get Customer by ID** (`GET /api/customers/:customerId`)
 
     * **Response (200 OK)**
 
-      ```json
-      {
-        "success": true,
-        "message": "Customer fetched successfully",
-        "data": {
-          "customerId": "87b3d7e1-8d9a-4f51-bf01-6f1e92f0f194",
-          "name": "John Doe",
-          "email": "john.doe@example.com",
-          "phone": "123-456-7890",
-          "createdAt": "2025-04-11T12:34:56.789Z"
-        }
-      }
-      ```
-
   * **Delete Customer** (`DELETE /api/customers/:customerId`)
 
     * **Response (200 OK)**
-
-      ```json
-      {
-        "success": true,
-        "message": "Customer deleted successfully"
-      }
-      ```
 
 * **Bike Management**
 
@@ -154,57 +104,13 @@ A backend API for managing customers, bikes, and service records at a bike servi
       ```
     * **Response (201 Created)**
 
-      ```json
-      {
-        "success": true,
-        "message": "Bike added successfully",
-        "data": {
-          "bikeId": "f3f1b192-3e62-402e-9bd3-d351a5a10e92",
-          "brand": "Yamaha",
-          "model": "R15",
-          "year": 2022,
-          "customerId": "87b3d7e1-8d9a-4f51-bf01-6f1e92f0f194"
-        }
-      }
-      ```
-
   * **Get All Bikes** (`GET /api/bikes`)
 
     * **Response (200 OK)**
 
-      ```json
-      {
-        "success": true,
-        "message": "Bikes fetched successfully",
-        "data": [
-          {
-            "bikeId": "f3f1b192-3e62-402e-9bd3-d351a5a10e92",
-            "brand": "Yamaha",
-            "model": "R15",
-            "year": 2022,
-            "customerId": "87b3d7e1-8d9a-4f51-bf01-6f1e92f0f194"
-          }
-        ]
-      }
-      ```
-
   * **Get Bike by ID** (`GET /api/bikes/:bikeId`)
 
     * **Response (200 OK)**
-
-      ```json
-      {
-        "success": true,
-        "message": "Bike fetched successfully",
-        "data": {
-          "bikeId": "f3f1b192-3e62-402e-9bd3-d351a5a10e92",
-          "brand": "Yamaha",
-          "model": "R15",
-          "year": 2022,
-          "customerId": "87b3d7e1-8d9a-4f51-bf01-6f1e92f0f194"
-        }
-      }
-      ```
 
 * **Service Record Management**
 
@@ -222,44 +128,13 @@ A backend API for managing customers, bikes, and service records at a bike servi
       ```
     * **Response (201 Created)**
 
-      ```json
-      {
-        "success": true,
-        "message": "Service record created successfully",
-        "data": {
-          "serviceId": "a1e4a182-c80d-4ff7-9a3d-873929f9d0e6",
-          "bikeId": "f3f1b192-3e62-402e-9bd3-d351a5a10e92",
-          "serviceDate": "2025-04-11T10:00:00.000Z",
-          "completionDate": null,
-          "description": "Oil change",
-          "status": "pending"
-        }
-      }
-      ```
-
   * **Get All Services** (`GET /api/services`)
 
     * **Response (200 OK)**
 
-      ```json
-      {
-        "success": true,
-        "message": "Service records fetched successfully",
-        "data": [ /* array of records */ ]
-      }
-      ```
-
   * **Get Service by ID** (`GET /api/services/:serviceId`)
 
     * **Response (200 OK)**
-
-      ```json
-      {
-        "success": true,
-        "message": "Service record fetched successfully",
-        "data": { /* single record */ }
-      }
-      ```
 
   * **Complete Service** (`PUT /api/services/:serviceId/complete`)
 
@@ -270,27 +145,11 @@ A backend API for managing customers, bikes, and service records at a bike servi
       ```
     * **Response (200 OK)**
 
-      ```json
-      {
-        "success": true,
-        "message": "Service marked as completed",
-        "data": { /* updated record with status "done" */ }
-      }
-      ```
-
 * **Overdue & Pending Services**
 
   * **Get Pending/Overdue** (`GET /api/services/status`)
 
     * **Response (200 OK)**
-
-      ```json
-      {
-        "success": true,
-        "message": "Overdue or pending services fetched successfully",
-        "data": [ /* records older than 7 days with pending/in-progress */ ]
-      }
-      ```
 
 * **Error Handling**
 
