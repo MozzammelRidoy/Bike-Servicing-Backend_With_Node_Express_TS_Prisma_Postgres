@@ -62,27 +62,251 @@ A backend API for managing customers, bikes, and service records at a bike servi
 
 * **Customer Management**
 
-  * Create, read, update, delete customers (`/api/customers`)
-  * Get a specific customer by ID (`/api/customers/:customerId`)
-  * Delete a specific customer by ID (`/api/customers/:customerId`)	
-	
+  * **Create Customer** (`POST /api/customers`)
+
+    * **Request Body**
+
+      ```json
+      {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "phone": "123-456-7890"
+      }
+      ```
+    * **Response (201 Created)**
+
+      ```json
+      {
+        "success": true,
+        "message": "Customer created successfully",
+        "data": {
+          "customerId": "87b3d7e1-8d9a-4f51-bf01-6f1e92f0f194",
+          "name": "John Doe",
+          "email": "john.doe@example.com",
+          "phone": "123-456-7890",
+          "createdAt": "2025-04-11T12:34:56.789Z"
+        }
+      }
+      ```
+
+  * **Get All Customers** (`GET /api/customers`)
+
+    * **Response (200 OK)**
+
+      ```json
+      {
+        "success": true,
+        "message": "Customers fetched successfully",
+        "data": [
+          {
+            "customerId": "87b3d7e1-8d9a-4f51-bf01-6f1e92f0f194",
+            "name": "John Doe",
+            "email": "john.doe@example.com",
+            "phone": "123-456-7890",
+            "createdAt": "2025-04-11T12:34:56.789Z"
+          }
+        ]
+      }
+      ```
+
+  * **Get Customer by ID** (`GET /api/customers/:customerId`)
+
+    * **Response (200 OK)**
+
+      ```json
+      {
+        "success": true,
+        "message": "Customer fetched successfully",
+        "data": {
+          "customerId": "87b3d7e1-8d9a-4f51-bf01-6f1e92f0f194",
+          "name": "John Doe",
+          "email": "john.doe@example.com",
+          "phone": "123-456-7890",
+          "createdAt": "2025-04-11T12:34:56.789Z"
+        }
+      }
+      ```
+
+  * **Delete Customer** (`DELETE /api/customers/:customerId`)
+
+    * **Response (200 OK)**
+
+      ```json
+      {
+        "success": true,
+        "message": "Customer deleted successfully"
+      }
+      ```
+
 * **Bike Management**
 
-  * Add, view, update bikes (`/api/bikes`)
-  * Get a specific bike by ID (`/api/bikes/:bikeId`)
+  * **Add Bike** (`POST /api/bikes`)
+
+    * **Request Body**
+
+      ```json
+      {
+        "brand": "Yamaha",
+        "model": "R15",
+        "year": 2022,
+        "customerId": "87b3d7e1-8d9a-4f51-bf01-6f1e92f0f194"
+      }
+      ```
+    * **Response (201 Created)**
+
+      ```json
+      {
+        "success": true,
+        "message": "Bike added successfully",
+        "data": {
+          "bikeId": "f3f1b192-3e62-402e-9bd3-d351a5a10e92",
+          "brand": "Yamaha",
+          "model": "R15",
+          "year": 2022,
+          "customerId": "87b3d7e1-8d9a-4f51-bf01-6f1e92f0f194"
+        }
+      }
+      ```
+
+  * **Get All Bikes** (`GET /api/bikes`)
+
+    * **Response (200 OK)**
+
+      ```json
+      {
+        "success": true,
+        "message": "Bikes fetched successfully",
+        "data": [
+          {
+            "bikeId": "f3f1b192-3e62-402e-9bd3-d351a5a10e92",
+            "brand": "Yamaha",
+            "model": "R15",
+            "year": 2022,
+            "customerId": "87b3d7e1-8d9a-4f51-bf01-6f1e92f0f194"
+          }
+        ]
+      }
+      ```
+
+  * **Get Bike by ID** (`GET /api/bikes/:bikeId`)
+
+    * **Response (200 OK)**
+
+      ```json
+      {
+        "success": true,
+        "message": "Bike fetched successfully",
+        "data": {
+          "bikeId": "f3f1b192-3e62-402e-9bd3-d351a5a10e92",
+          "brand": "Yamaha",
+          "model": "R15",
+          "year": 2022,
+          "customerId": "87b3d7e1-8d9a-4f51-bf01-6f1e92f0f194"
+        }
+      }
+      ```
 
 * **Service Record Management**
 
-  * Create, read, update services (`/api/services`)
-  * Get a specific service record by ID (`/api/services/:serviceId`)
-  * Mark services as completed (`/api/services/:serviceId/complete`)
+  * **Create Service** (`POST /api/services`)
+
+    * **Request Body**
+
+      ```json
+      {
+        "bikeId": "f3f1b192-3e62-402e-9bd3-d351a5a10e92",
+        "serviceDate": "2025-04-11T10:00:00.000Z",
+        "description": "Oil change",
+        "status": "pending"
+      }
+      ```
+    * **Response (201 Created)**
+
+      ```json
+      {
+        "success": true,
+        "message": "Service record created successfully",
+        "data": {
+          "serviceId": "a1e4a182-c80d-4ff7-9a3d-873929f9d0e6",
+          "bikeId": "f3f1b192-3e62-402e-9bd3-d351a5a10e92",
+          "serviceDate": "2025-04-11T10:00:00.000Z",
+          "completionDate": null,
+          "description": "Oil change",
+          "status": "pending"
+        }
+      }
+      ```
+
+  * **Get All Services** (`GET /api/services`)
+
+    * **Response (200 OK)**
+
+      ```json
+      {
+        "success": true,
+        "message": "Service records fetched successfully",
+        "data": [ /* array of records */ ]
+      }
+      ```
+
+  * **Get Service by ID** (`GET /api/services/:serviceId`)
+
+    * **Response (200 OK)**
+
+      ```json
+      {
+        "success": true,
+        "message": "Service record fetched successfully",
+        "data": { /* single record */ }
+      }
+      ```
+
+  * **Complete Service** (`PUT /api/services/:serviceId/complete`)
+
+    * **Request Body (optional)**
+
+      ```json
+      { "completionDate": "2025-04-11T15:30:00.000Z" }
+      ```
+    * **Response (200 OK)**
+
+      ```json
+      {
+        "success": true,
+        "message": "Service marked as completed",
+        "data": { /* updated record with status "done" */ }
+      }
+      ```
 
 * **Overdue & Pending Services**
 
-  * Endpoint to retrieve jobs pending or in-progress older than 7 days (`/api/services/status`)
+  * **Get Pending/Overdue** (`GET /api/services/status`)
+
+    * **Response (200 OK)**
+
+      ```json
+      {
+        "success": true,
+        "message": "Overdue or pending services fetched successfully",
+        "data": [ /* records older than 7 days with pending/in-progress */ ]
+      }
+      ```
 
 * **Error Handling**
 
-  * Standardized error response format with status codes and optional stack trace in development
+  * Standardized error response:
 
----
+    ```json
+    {
+    "status": 404,
+    "success": false,
+    "message": "Customer Not found",
+    "error": [
+        {
+            "path": "id",
+            "message": "Customer Not found"
+        }
+    ],
+    "stack": null
+    }
+    ```
